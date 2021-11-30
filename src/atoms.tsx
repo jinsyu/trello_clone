@@ -6,5 +6,9 @@ interface ITodoState {
 
 export const todoState = atom<ITodoState>({
   key: "todo",
-  default: { todo: ["a", "b", "c", "d", "e", "f"], doing: [], done: [] },
+  default: {
+    "To Do": ["a", "b", "c", "d", "e", "f"],
+    Doing: ["h", "x"],
+    Done: ["z"],
+  },
 });

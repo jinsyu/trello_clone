@@ -1,9 +1,9 @@
 # TRELLO CLONE
 
-## React.js with Typescript
+## React.js with typescript
 
 ### packages
 
-- beautiful-dnd
+- beautiful-dnd+
 - recoil
 - styled-components

@@ -12,8 +12,7 @@ import DraggableCard from "./components/DraggableCard";
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 680px;
-  width: 100%;
+  width: 100vw;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -21,21 +20,29 @@ const Wrapper = styled.div`
 `;
 const Boards = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   gap: 10px;
 `;
 
 function App() {
   const [todos, setTodos] = useRecoilState(todoState);
-  const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
-    // setTodos((oldTodos) => {
-    //   if (!destination) return oldTodos;
-    //   const newTodos = [...oldTodos];
-    //   newTodos.splice(source.index, 1);
-    //   newTodos.splice(destination?.index, 0, draggableId);
-    //   return newTodos;
-    // });
+  const onDragEnd = (info: DropResult) => {
+    console.log(info);
+    const { destination, draggableId, source } = info;
+    if (source.droppableId === destination?.droppableId) {
+      setTodos((allBoards) => {
+        if (!destination) return allBoards;
+        const newBoard = [...allBoards[source.droppableId]];
+        newBoard.splice(source.index, 1);
+        newBoard.splice(destination?.index, 0, draggableId);
+        return {
+          ...allBoards,
+          [source.droppableId]: newBoard,
+        };
+      });
+    }
   };
 
   return (
